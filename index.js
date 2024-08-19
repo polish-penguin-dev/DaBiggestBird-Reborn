@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { readdirSync } from "fs";
-import { InteractionTypes, ApplicationCommandTypes, Client } from "oceanic.js";
 import { commands } from "./commands/commands.js";
+import { InteractionTypes, ApplicationCommandTypes, Client } from "oceanic.js";
 
 const client = new Client({
     auth: `Bot ${process.env.token}`,
