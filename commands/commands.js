@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionTypes, ApplicationCommandTypes } from "oceanic.js";
 
-return [
+export const commands = [
     {
         type: ApplicationCommandTypes.CHAT_INPUT,
         name: "help",
