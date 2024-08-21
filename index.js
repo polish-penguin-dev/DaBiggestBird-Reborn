@@ -1,4 +1,16 @@
 import "dotenv/config";
+
+//Initialise Firebase
+import admin from "firebase-admin";
+import account from "./account-key.json" assert { type: "json" };
+
+admin.initializeApp({
+    credential: admin.credential.cert(account)
+});
+  
+const db = admin.firestore();
+
+//Initialise Dicord
 import { readdirSync } from "fs";
 import { commands } from "./commands/commands.js";
 import { InteractionTypes, ApplicationCommandTypes, Client } from "oceanic.js";
@@ -33,11 +45,16 @@ client.on("interactionCreate", async (interaction) => {
         interaction.type === InteractionTypes.APPLICATION_COMMAND &&
         interaction.data.type === ApplicationCommandTypes.CHAT_INPUT
     ) {
+        //Set-up User In Firestore
+        const doc = db.collection(interaction.guildID).doc(interaction.user.id);
+        const docSnap = await doc.get();
+        if (!docSnap.exists) await doc.set({ "KG": 1, "BS": 0, "MLK": 0, "inventory": {}, "achievements": {} });
+
         const handler = handlers.get(interaction.data.name);
 
         if (handler) {
             await interaction.defer();
-            await handler(interaction);
+            await handler(interaction, db);
         }
     }
 });
