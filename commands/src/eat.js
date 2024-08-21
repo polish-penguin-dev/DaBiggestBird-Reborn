@@ -14,8 +14,8 @@ export default async function(interaction, db) {
         const responses = ["That Was A Very Small", "That Was A Medium-Sized", "That Was A Very Large"];
 
         if(amount <= 2) return responses[0];
-        if(amount === 3) return responses[1];
-        if(amount >= 4) return responses[2];
+        if(amount === 3 || amount === 4) return responses[1];
+        if(amount >= 5) return responses[2];
     }
 
     const food = interaction.data.options.getString("food");
@@ -35,7 +35,7 @@ export default async function(interaction, db) {
             });
             break;
         case "weed":
-            let amount2 = randomNumber(2, 10);
+            let amount2 = randomNumber(3, 6);
             await doc.update({
                 KG: kg + amount2
             });
@@ -49,7 +49,7 @@ export default async function(interaction, db) {
             });
             break;
         case "burger":
-            await interaction.createFollowup({ content: "WIP" });
+            await interaction.createFollowup({ content: "W.I.P" });
             break;
     }
 }
