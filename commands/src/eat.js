@@ -14,7 +14,7 @@ export default async function(interaction, db) {
         const responses = ["That Was A Very Small", "That Was A Medium-Sized", "That Was A Very Large"];
 
         if(amount <= 2) return responses[0];
-        if(amount === 3)return responses[1];
+        if(amount === 3) return responses[1];
         if(amount >= 4) return responses[2];
     }
 
