@@ -1,4 +1,8 @@
+const cooldowns = new Set();
+
 export default async function(interaction, db) {
+    if(cooldowns.has(interaction.user.id)) return await interaction.createFollowup({ embeds: [{ "description": "🕒 Uh-Oh! That Command Is On Cooldown! Please Wait! (2h)", "color": 0x05a2e1 }] });
+
     const user = interaction.data.options.getUser("user");
 
     const executer = db.collection(interaction.guildID).doc(interaction.user.id);
@@ -33,4 +37,7 @@ export default async function(interaction, db) {
             "color": 0x05a2e1
         }]
     });
+
+    cooldowns.add(interaction.user.id);
+    setTimeout(() => { cooldowns.delete(interaction.user.id) }, 7200000);
 }
