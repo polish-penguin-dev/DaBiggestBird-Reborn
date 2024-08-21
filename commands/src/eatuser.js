@@ -33,7 +33,7 @@ export default async function(interaction, db) {
     await interaction.createFollowup({
         embeds: [{
             "title": "Victory! 🎉 🥳",
-            "description": `You Ate 1/2 Of <@${user.id}>'s (${Math.round(victimKg / 2)}KG!)`,
+            "description": `You Ate 1/2 Of <@${user.id}>'s KG! (${Math.round(victimKg / 2)}KG!)`,
             "color": 0x05a2e1
         }]
     });
