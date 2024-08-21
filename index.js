@@ -10,6 +10,7 @@ const client = new Client({
     }
 });
 
+//Command Handler
 const handlers = new Map();
 const files = readdirSync("./commands/src").filter(file => file.endsWith(".js"));
 
@@ -19,12 +20,14 @@ for (const file of files) {
     handlers.set(name, command.default);
 }
 
+//Command Deployer
 client.on("ready", async () => {
     console.log(`Ready As ${client.user.tag}!`);
 
     await client.application.bulkEditGlobalCommands(commands);
 });
 
+//Command Handler
 client.on("interactionCreate", async (interaction) => {
     if (
         interaction.type === InteractionTypes.APPLICATION_COMMAND &&
