@@ -26,7 +26,7 @@ export default async function(interaction, db) {
     const victimKg = victimSnap.data().KG;
 
     if(user.id === interaction.user.id) return await interaction.createFollowup({ embeds: [{ "title": ":x: You Cannot Milk Yourself!", "color": 0x05a2e1 }] });
-    if(victimKg === 1) return await interaction.createFollowup({ embeds: [{ "title": ":x: That Person Needs At Least 6KG!", "color": 0x05a2e1 }] });
+    if(victimKg < 6) return await interaction.createFollowup({ embeds: [{ "title": ":x: That Person Needs At Least 6KG!", "color": 0x05a2e1 }] });
 
     const milkChance = chance();
 
